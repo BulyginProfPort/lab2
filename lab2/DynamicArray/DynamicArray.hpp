@@ -80,6 +80,10 @@ public:
             return data[index] = value;
     }
     
+    int getSize(){
+        return size;
+    }
+    
     //Реалиация realloc() (изменения размера массива с сохранием элементов в нем)
     void ReSize(int nSize){
         if (nSize < 0){
