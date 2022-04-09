@@ -7,98 +7,109 @@ using namespace std;
 template<class D>
 class DynamicArray{
 private:
-    D* data = nullptr;
+    D* arr = nullptr;
     int size = 0;
 public:
-    //Массив из k элементов
+    //Default constructor
     DynamicArray(){
         size = 1;
-        data = (D*) new D[1];
-        memset(data, 0, sizeof(D) );
+        arr = (D*) new D[1];
+        memset(arr, 0, sizeof(D) );
     }
+    
+    //K array's elements constructor
     DynamicArray(int k){
         if (k < 0){
             throw "Array size < 0";
         }
         size = k;
-        data = (D*) new D[k];
-        memset(data, 0, k * sizeof(D) );
+        arr = (D*) new D[k];
+        memset(arr, 0, k * sizeof(D) );
     }
     
-    //Массив из k элементов массива arrIn
+    //K array's elements constructor
     DynamicArray(D* arrIn, int k){
         if (k < 0){
             throw "Array size < 0";
         }
         size = k;
-        data = (D*) new D[k];
-        copy(arrIn, arrIn+k, data);
+        arr = (D*) new D[k];
+        copy(arrIn, arrIn+k, arr);
     }
     
-    //Копирующий конструктор
+    //Copy constructor
     DynamicArray(DynamicArray<D> const &arrIn ){
         size = arrIn.size;
-        data = (D*) new D[arrIn.size];
-        memset( data, 0, size * sizeof(D) );
-        copy(arrIn.data, arrIn.data + min(size,arrIn.size), data);
+        arr = (D*) new D[arrIn.size];
+        memset( arr, 0, size * sizeof(D) );
+        copy(arrIn.arr, arrIn.arr + min(size,arrIn.size), arr);
     }
     
-    //Копирующий констрктор на заданном интервале
+    //Copy constructor by interval
+    DynamicArray(D* arrIn,int start, int end){
+        start -= 1;
+        size = end - start; //Set result array size
+        arr = (D*) new D[size];
+        copy(arrIn + start, arrIn + end, arr);//Copy array's interval in new array
+    }
+    
+    //Copy constructor by interval
     DynamicArray(const DynamicArray<D> &arrIn,int start, int end){
         start -= 1;
         if (arrIn.size < end){
             throw "Array size < choosed interval";
         }
-        size = end - start; //Задаем размер итогового массива
-        data = (D*) new D[size];
-        copy(arrIn.data + start, arrIn.data + end, data);//Копируем интервал массива arrIn в новый массив
+        size = end - start; //Set result array size
+        arr = (D*) new D[size];
+        copy(arrIn.arr + start, arrIn.arr + end, arr);//Copy array's interval in new array
     }
-    //Вывод в консоль массива
+    //Print Array
     void Print(){
         if (size < 0){
             throw "Array size < 0";
         }
         for (int i = 0; i < size; i++){
-            cout<<data[i]<<'\t';
+            cout<<arr[i]<<'\t';
         }
         cout<<endl;
     }
     
-    //Получение элемента массива по индексу
+    //Get array element
     D Get(int index){
         if ( index > size ){
             throw "Index out of range";
         }
-        return data[index];
+        return arr[index];
     }
 
-    //Определение элемента массива по индекс
+    //Set array element by index
     void Set(D value, int index){
-            if (index < 0){
-                throw "Index < 0";
-            }
-            return data[index] = value;
+        if (index < 0){
+            throw "Index < 0";
+        }
+        arr[index] = value;
     }
     
     int getSize(){
         return size;
     }
     
-    //Реалиация realloc() (изменения размера массива с сохранием элементов в нем)
+    //Realization realloc() (change size array with saving elements)
     void ReSize(int nSize){
         if (nSize < 0){
             throw "New size of array < 0";
         }
-        D* tmp = data;
-        data = (D*) new D[nSize];
-        memset(data,0,nSize * sizeof(D) );
-        copy(tmp,tmp + min(size, nSize), data);
+        D* tmp = arr;
+        arr = (D*) new D[nSize];
+        memset(arr,0,nSize * sizeof(D) );
+        copy(tmp,tmp + min(size, nSize), arr);
         size = nSize;
         delete[] tmp;
     }
-
+    
+    //Distructor
     ~DynamicArray(){
-        delete[] data;
+        delete[] arr;
     }
     
 };
