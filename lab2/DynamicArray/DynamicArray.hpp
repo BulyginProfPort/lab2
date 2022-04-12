@@ -79,6 +79,8 @@ public:
         if ( index > size ){
             throw "Index out of range";
         }
+        //Print
+        cout<<arr[index]<<endl;
         return arr[index];
     }
 
@@ -87,7 +89,11 @@ public:
         if (index < 0){
             throw "Index < 0";
         }
+        //Print
+        cout<<arr[index]<<endl;
         arr[index] = value;
+        cout<<arr[index]<<endl;
+        
     }
     
     int getSize(){

@@ -3,10 +3,14 @@
 #include "Matrix/matrix.hpp"
 #include "DynamicArray/DynamicArray.hpp"
 #include "LinkedList/LinkedList.hpp"
+#include "Sequence/ArraySequence/ArraySequence.hpp"
+#include "Sequence/ListSequence/ListSequence.hpp"
+#include "Sequence/Sequence.hpp"
+
 using namespace std;
 
 int main(){
-    int n = 3, m = 3;
+    int input = 0;
     
     //DynamicArray Int
     int arri[9] = {0,1,2,3,4,5,6,7,8};
@@ -53,23 +57,90 @@ int main(){
 
     //LinkedList
     LinkedList<int> listD;
+    cout<<"listD"<<'\n';
     listD.Print();
+    cout<<endl;
+    
+    cout<<"Pop Front <listD>"<<'\n';
     listD.PopFront();
     listD.Print();
+    cout<<endl;
     
-    
+    cout<<"Copy array constructor <listIm>"<<'\n';
     LinkedList<int> listIm(arri,5);
     listIm.Print();
-    listIm.GetElmntByIndex(0);
+    cout<<endl;
     
-    listIm.InsertAt(123, 3);
-    listIm.Print();
+    //
+    cout<<"Copy LinkedList constructor <listLC>"<<'\n';
+    LinkedList<int> listLC(listIm);
+    listLC.Print();
+    cout<<endl;
+    //
     
+    //
+    cout<<"First value <listIm>"<<'\n';
+    listIm.GetFirstValue();
+    cout<<"Last value <listIm>"<<'\n';
+    listIm.GetLastValue();
+    
+    listIm.GetElmntByIndex(2);
+    cout<<endl;
+
+    cout<<"Push Front <listIm>"<<'\n';
     listIm.Append(9);
     listIm.Print();
+    cout<<endl;
     
+    cout<<"Push Back <listIm>"<<'\n';
     listIm.Prepend(9);
     listIm.Print();
+    cout<<endl;
+    
+    cout<<"Pop Front <listIm>"<<'\n';
+    listIm.PopFront();
+    listIm.Print();
+    cout<<endl;
+    
+    cout<<"Pop Back <listIm>"<<'\n';
+    listIm.PopBack();
+    listIm.Print();
+    cout<<endl;
 
+    cout<<"Add element to LinkedList <listIm>"<<'\n';
+    listIm.InsertAt(123, 3);
+    listIm.Print();
+    cout<<endl;
+    
+    cout<<"Concat 2 lists <listLC> <listIm>"<<'\n';
+    LinkedList<int> list2 = listLC.Concat(&listIm);
+    list2.Print();
+    cout<<endl;
+    
+    switch (input){
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            break;
+        default:
+            break;
+    }
+    
     return 0;
 }
