@@ -83,7 +83,7 @@ public:
     Matrix operator+(Matrix<T> const matrix2){
         if ( rows == matrix2.rows && columns == matrix2.columns ){
             Matrix<T> tmp(rows,columns);
-            ;tmp.AM = new ArraySequence<T>[rows];
+            tmp.AM = new ArraySequence<T>[rows];
             for (int i = 0; i < rows; i++){
                 tmp.AM[i] = ArraySequence<T>(columns);
                 tmp.AM[i] = AM[i].operator+(matrix2.AM[i]);
