@@ -1,0 +1,318 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red86\green96\blue107;
+\red180\green0\blue98;\red0\green11\blue255;\red92\green38\blue153;\red186\green0\blue17;\red40\green75\blue79;
+\red59\green127\blue137;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c33600\c37617\c42000;
+\csgenericrgb\c70588\c0\c38431\c80000;\csgenericrgb\c0\c4314\c100000;\csgenericrgb\c36078\c14902\c60000;\csgenericrgb\c72941\c0\c6667;\csgenericrgb\c15686\c29412\c30980;
+\csgenericrgb\c23137\c49804\c53726;}
+\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab741
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf2 \cb3     \cf4 //DynamicArray Int\cf2 \
+    \cf5 int\cf2  arri[\cf6 9\cf2 ] = \{\cf6 0\cf2 ,\cf6 1\cf2 ,\cf6 2\cf2 ,\cf6 3\cf2 ,\cf6 4\cf2 ,\cf6 5\cf2 ,\cf6 6\cf2 ,\cf6 7\cf2 ,\cf6 8\cf2 \};\
+    \cf7 cout\cf2 <<\cf8 "Static Array"\cf2 <<\cf7 endl\cf2 ;\
+    \cf5 for\cf2  (\cf5 int\cf2  i = \cf6 0\cf2 ; i < \cf6 9\cf2 ; i++)\{\
+        \cf7 cout\cf2 <<arri[i]<<\cf6 '\\t'\cf2 ;\
+    \}\
+    \cf7 cout\cf2 <<\cf6 '\\n'\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray "\cf2 <<\cf6 '\\n'\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrIm> conctructor by static array"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrIm(arri, \cf6 9\cf2 );\
+    arrIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arraI> cnostructor by the same class DynamicArray"\cf2 <<\cf7 endl\cf2 ;;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arraI(arrIm);\
+    arraI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrIa> constructor by array interval"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrIa(arri,\cf6 4\cf2 ,\cf6 9\cf2 );\
+    arrIa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrI> constructor by the same class 'DynamicArray' interval"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrI(arrIm,\cf6 4\cf2 ,\cf6 9\cf2 );\
+    arrI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrI> ReSize"\cf2 <<\cf7 endl\cf2 ;\
+    arrI.\cf10 ReSize\cf2 (\cf6 20\cf2 );\
+    arrI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrNI> constructor by the number of array elements"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrNI(arri,\cf6 5\cf2 );\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray <arrNI> ReSize"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 ReSize\cf2 (\cf6 10\cf2 );\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray operator <arrNI> + <arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "\\n<arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    arrIa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrTmp1 = arrNI.\cf5 operator\cf2 +(arrIa);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp1>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp1.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+\
+    \cf7 cout\cf2 <<\cf8 "DynamicArray operator <arrNI> - <arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "\\n<arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    arrIa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrTmp2 = arrNI.\cf5 operator\cf2 -(arrIa);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp2>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp2.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray operator <arrIa> * <arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "\\n<arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    arrIa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrTmp3 = arrIa.\cf5 operator\cf2 *(arrNI);\
+    \cf7 cout\cf2 <<\cf8 "arrTmp3"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp3.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "DynamicArray operator <arrIa> / <arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "\\n<arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrIa>"\cf2 <<\cf7 endl\cf2 ;\
+    arrIa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 DynamicArray\cf2 <\cf5 int\cf2 > arrTmp4 = arrIa.\cf5 operator\cf2 /(arrNI);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp4>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp4.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "LinkedList"\cf2 <<\cf6 '\\n'\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf4 //  LinkedList\cf2 \
+    \cf9 LinkedList\cf2 <\cf5 int\cf2 > listD;\
+    \cf7 cout\cf2 <<\cf8 "<listD>"\cf2 <<\cf7 endl\cf2 ;\
+    listD.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Pop Front <listD>"\cf2 <<\cf7 endl\cf2 ;\
+    listD.\cf10 PopFront\cf2 ();\
+    listD.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Copy array constructor <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 LinkedList\cf2 <\cf5 int\cf2 > listIm(arri,\cf6 5\cf2 );\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Copy LinkedList constructor <listLC>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 LinkedList\cf2 <\cf5 int\cf2 > listLC(listIm);\
+    listLC.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "First value <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 GetFirstValue\cf2 ();\
+    \cf7 cout\cf2 <<\cf8 "Last value <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 GetLastValue\cf2 ();\
+    \
+    listIm.\cf10 Get\cf2 (\cf6 2\cf2 );\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "Push Front <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 Append\cf2 (\cf6 9\cf2 );\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Push Back <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 Prepend\cf2 (\cf6 9\cf2 );\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Pop Front <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 PopFront\cf2 ();\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Pop Back <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 PopBack\cf2 ();\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "Add element to LinkedList <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 InsertAt\cf2 (\cf6 123\cf2 , \cf6 3\cf2 );\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Concat 2 lists <listLC> <listIm>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 LinkedList\cf2 <\cf5 int\cf2 > list2 = listLC.\cf10 Concat\cf2 (&listIm);\
+    list2.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf4 //  Array Sequence\cf2 \
+    \cf7 cout\cf2 <<\cf8 "Array Sequence"\cf2 <<\cf6 '\\n'\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrZ> "\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrZ;\
+    arrZ.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrSi> "\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrSi(arri, \cf6 9\cf2 );\
+    arrSi.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrSI> "\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrSI(arrI, \cf6 2\cf2 , \cf6 4\cf2 );\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrSI> Append"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Append\cf2 (\cf6 99\cf2 );\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrSI> Prepend"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Prepend\cf2 (\cf6 99\cf2 );\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence <arrSaI> "\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrSaI(arraI,\cf6 4\cf2 );\
+    arrSaI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence operator <arrSaI> + <arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSaI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSaI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrTmp5 = arrSaI.\cf5 operator\cf2 +(arrSI);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp5>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp5.\cf10 Print\cf2 ();\
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence operator <arrSaI> - <arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSaI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSaI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrTmp6 = arrSaI.\cf5 operator\cf2 -(arrSI);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp6>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp6.\cf10 Print\cf2 ();\
+    \
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence operator <arrSaI> * <arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSaI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSaI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrTmp7 = arrSaI.\cf5 operator\cf2 *(arrSI);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp7>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp7.\cf10 Print\cf2 ();\
+    \
+    \
+    \cf7 cout\cf2 <<\cf8 "ArraySequence operator <arrSaI> / <arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSaI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSaI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf7 cout\cf2 <<\cf8 "<arrSI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrSI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrTmp8 = arrSaI.\cf5 operator\cf2 /(arrSI);\
+    \cf7 cout\cf2 <<\cf8 "<arrTmp8>"\cf2 <<\cf7 endl\cf2 ;\
+    arrTmp8.\cf10 Print\cf2 ();\
+    \
+    \cf7 cout\cf2 <<\cf8 "LinkedList <ListD>"\cf2 <<\cf7 endl\cf2 ;\
+    listIm.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \cf9 ArraySequence\cf2 <\cf5 int\cf2 > arrL(listIm);\
+    \cf7 cout\cf2 <<\cf8 "DynamicArray Sequence"\cf2 <<\cf7 endl\cf2 ;\
+    arrL.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \
+    \cf7 cout\cf2 <<\cf8 "LinkedListSequence"\cf2 <<\cf6 '\\n'\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 LinkedListSequence\cf2 <\cf5 int\cf2 > listS;\
+    \cf7 cout\cf2 <<\cf8 "LinkedListSequence <listS>"\cf2 <<\cf7 endl\cf2 ;\
+    listS.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 LinkedListSequence\cf2 <\cf5 int\cf2 > listSa(arri, \cf6 9\cf2 );\
+    \cf7 cout\cf2 <<\cf8 "LinkedListSequence <listSa>"\cf2 <<\cf7 endl\cf2 ;\
+    listSa.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 LinkedListSequence\cf2 <\cf5 int\cf2 > listSl(listIm);\
+    \cf7 cout\cf2 <<\cf8 "LinkedListSequence <listSl>"\cf2 <<\cf7 endl\cf2 ;\
+    listSl.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 LinkedListSequence\cf2 <\cf5 int\cf2 > lisrSda(arrNI);\
+    \cf7 cout\cf2 <<\cf8 "LinkedListSequence <arrNI>"\cf2 <<\cf7 endl\cf2 ;\
+    arrNI.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf7 cout\cf2 <<\cf8 "Sequence"\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \
+    \cf9 matrix\cf2 <\cf5 int\cf2 > mtrx1(\cf6 3\cf2 , \cf6 3\cf2 );\
+    \cf7 printf\cf2 (\cf8 "<mtrx1>\\n"\cf2 );\
+    mtrx1.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    mtrx1.\cf10 randIn\cf2 ();\
+    \cf7 printf\cf2 (\cf8 "<mtrx1>\\n"\cf2 );\
+    mtrx1.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    mtrx1.\cf10 SetMij\cf2 (\cf6 0\cf2 , \cf6 0\cf2 , \cf6 100\cf2 );\
+    \cf7 printf\cf2 (\cf8 "<mtrx1>\\n"\cf2 );\
+    mtrx1.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+\
+    \
+    \cf9 matrix\cf2 <\cf5 int\cf2 > mtrx2(\cf6 3\cf2 , \cf6 3\cf2 );\
+    \
+    mtrx2.\cf10 randIn\cf2 ();\
+    \cf7 printf\cf2 (\cf8 "<mtrx2>\\n"\cf2 );\
+    mtrx2.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \
+    mtrx1.\cf10 Print\cf2 ();\
+    mtrx2.\cf10 Print\cf2 ();\
+    \cf9 matrix\cf2 <\cf5 int\cf2 > mtrx3 = mtrx1.\cf5 operator\cf2 +(mtrx2);\
+    \cf7 printf\cf2 (\cf8 "<mtrx1> + <mtrx2> = <mtrx3>\\n"\cf2 );\
+    mtrx3.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 matrix\cf2 <\cf5 int\cf2 > mtrx4 = mtrx1.\cf5 operator\cf2 -(mtrx2);\
+    \cf7 printf\cf2 (\cf8 "<mtrx1> - <mtrx2> = <mtrx3>\\n"\cf2 );\
+    mtrx4.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    \
+    \cf9 matrix\cf2 <\cf5 int\cf2 > mtrx5 = mtrx1.\cf5 operator\cf2 *(mtrx2);\
+    \cf7 printf\cf2 (\cf8 "<mtrx1> * <mtrx2> = <mtrx4>\\n"\cf2 );\
+    mtrx5.\cf10 Print\cf2 ();\
+    \cf7 cout\cf2 <<\cf7 endl\cf2 ;\
+    }
