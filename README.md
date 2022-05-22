@@ -16,8 +16,8 @@
 ## Реализация классов
 ### class Dynamic Array
 
-## class Linked List
+### class Linked List
 
-## class Sequence
+### class Sequence
 
-## class 
+### class 
