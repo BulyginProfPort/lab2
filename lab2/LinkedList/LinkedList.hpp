@@ -4,12 +4,12 @@
 #include <iostream>
 using namespace std;
 
-template <class L>
+template <class T>
 class LinkedList{
 private:
     // Private descriptions of list's structures
     struct Node {
-        L value;
+        T value;
         struct Node *next = nullptr;
         struct Node *prev = nullptr;
     };
@@ -36,9 +36,30 @@ public:
         list->head->value = 0;
         list->tail = list->head;
     }
-
+    
+    LinkedList(int k){
+        list = (struct List*) new struct List;
+        list->head = (struct Node*) new struct Node;
+        
+        size = k;
+        
+        struct Node *tmpH = list->head;
+        
+        for (int i = 0; i < size; i++){
+            struct Node *tmp = list->head;
+            list->head->value = 0;
+            if (i < k - 1){
+                list->head->next = (struct Node*) new struct Node;
+                list->head = list->head->next;
+                list->head->prev = tmp;
+            }
+        }
+        list->tail = list->head;
+        list->head = tmpH;
+    }
+    
     //LinkedList constructor by copy an array
-    LinkedList(L* arr,int k){
+    LinkedList(T* arr,int k){
         list = (struct List*) new struct List;
         list->head = (struct Node*) new struct Node;
 
@@ -61,7 +82,7 @@ public:
     ///В Sequence использовать конструктор LinkedList котороый принимает на вход DynamicArray
     
     //LinkedList copy constructor
-    LinkedList(LinkedList<L> const &listIn){
+    LinkedList<T>(LinkedList<T> const &listIn){
         list = (struct List*) new struct List;
         list->head = (struct Node*) new struct Node;
     
@@ -84,28 +105,28 @@ public:
     }
     
     //Get SubList of LinkedList
-    LinkedList <L>* GetSubList(int startIndex,int endlIndex){
-        int rSize = endlIndex - startIndex + 1;
-        L* arr = new L[rSize];
-        struct Node *tmp = list->head;
+    LinkedList <T> GetSubList(int startIndex,int endIndex){
+        int rSize = endIndex - startIndex + 1;
+        T* arr = new T[rSize];
         int j = 0;
+        struct Node* tmp = list->head;
         for (int i = 0; i < size; i++){
-            list->head = list->head->next;
-            if (i == startIndex){
+            if (i >= startIndex && i <= endIndex){
                 arr[j] = list->head->value;
                 j++;
             }
+            else if(i >= endIndex){
+                break;
+            }
+            list->head = list->head->next;
         }
-        LinkedList<L> listRes(arr,rSize);
-        
+        list->head = tmp;
+        LinkedList<T> listRes(arr,rSize);
         //Print
-        cout<<"listRes"<<'\n';
-        listRes.Print();
+        //listRes.Print();
         return listRes;
     }
-    
-    struct Node* Move(int index){
-        index--;
+    struct Node* Move(int index) const{
         struct Node *tmp = list->head;
         for (int i = 0; i < index; i++){
             tmp = tmp->next;
@@ -114,69 +135,42 @@ public:
     }
     
     //Get the first element of LinkedList
-    L GetFirstValue(){
+    T GetFirstValue() const{
         if (size == 0){
             throw "IndexOutOfRange";
         }
         //Print
-        cout<<list->head->value<<'\n';
+        //cout<<list->head->value<<'\n';
         return list->head->value;
     }
     
     //Get the last element of LinkedList
-    L GetLastValue(){
+    T GetLastValue() const{
         if (size == 0){
             throw "IndexOutOfRange";
         }
         //Print
-        cout<<list->tail->value<<'\n';
+        //cout<<list->tail->value<<'\n';
         return list->tail->value;
     }
     
     //Get element of LinkedList by index
-    L GetElmntByIndex(int index){
-        index--;
-        L value;
-        struct Node *tmp = list->head;
-        for (int i = 0; i < index; i++){
-            list->head = list->head->next;
-        }
-        value = list->head->next->value;
-        list->head = tmp;
-        
+    T Get(int index) const{
+        struct Node* tmp = Move(index);
         //Print
-        cout<<"Value ["<<index + 1<<"]: "<<value<<'\n';
-        return value;
+        //cout<<"Value ["<<index + 1<<"]: "<<value<<'\n';
+        return tmp->value;
     }
     
     //Get length of LinkedList
-    int GetLength(){
+    int GetLength() const{
         //Print
-        cout<<"Size:"<<size<<'\n';
+        //cout<<"Size:"<<size<<'\n';
         return size;
     }
     
     //Add one element to the front of LinkedList
-    void Append(L value){
-        struct Node *tmp = (struct Node*) new struct Node;
-        tmp->value = value;
-        tmp->next = list->head;
-        tmp->prev = nullptr;
-
-        if (size == 0){
-            list->head = list->tail = tmp;
-        }
-        else{
-            list->head = tmp;
-        }
-        if (list->tail == nullptr){
-            list->tail = tmp;
-        }
-        size++;
-    }
-    
-    //Add one element to the end of LinkedList
-    void Prepend(L value){
+    void Append(T value){
         struct Node *tmp = (struct Node*) new struct Node;
         tmp->prev = list->tail;
         tmp->value = value;
@@ -189,6 +183,25 @@ public:
             list->head = list->tail = tmp;
         }
         else{
+            list->tail = tmp;
+        }
+        size++;
+    }
+    
+    //Add one element to the end of LinkedList
+    void Prepend(T value){
+        struct Node *tmp = (struct Node*) new struct Node;
+        tmp->value = value;
+        tmp->next = list->head;
+        tmp->prev = nullptr;
+
+        if (size == 0){
+            list->head = list->tail = tmp;
+        }
+        else{
+            list->head = tmp;
+        }
+        if (list->tail == nullptr){
             list->tail = tmp;
         }
         size++;
@@ -220,10 +233,9 @@ public:
         }
         delete tmp;
         size--;
-        
     }
     
-    void InsertAt(L item,int index){
+    void InsertAt(T item,int index){
         if (index == size){
             this->Prepend(item);
         }
@@ -243,24 +255,24 @@ public:
     }
     
     //Merg 2 LinkedList
-    LinkedList <L> Concat(LinkedList<L> *listIn){
+    LinkedList <T> Concat(LinkedList<T> *listIn){
         int newSize = size + listIn->size;
-        L* arr = new L[newSize];
+        T* arr = new T[newSize];
         int m = 0;
         for (int i = 0; i < size; i++){
-            struct Node *tmp = Move(i + 1);
+            struct Node *tmp = Move(i);
             arr[i] = tmp->value;
             m = i;
         }
         for (int i = 0; i < listIn->size; i++){
-            struct Node *tmp = listIn->Move(i + 1);
+            struct Node *tmp = listIn->Move(i);
             arr[(m+1)+i] = tmp->value;
         }
-        LinkedList<L> arrOut(arr, newSize);
+        LinkedList<T> arrOut(arr, newSize);
         delete[] arr;
         return arrOut;
     }
-    LinkedList<L>& operator=(const LinkedList& listIn){
+    LinkedList<T>& operator=(const LinkedList& listIn){
         list = (struct List*) new struct List;
         list->head = (struct Node*) new struct Node;
     
@@ -282,10 +294,10 @@ public:
         list->head = tmpH;
         return *this;
     }
-    void Print(){
+    void Print() const{
         Node *tmp = list->head;
         while (tmp){
-            cout<<tmp->value<<' ';
+            cout<<tmp->value<<'\t';
             tmp = tmp->next;
         }
         cout<<endl;

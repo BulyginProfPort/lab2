@@ -2,80 +2,72 @@
 #ifndef DynamicArray_hpp
 #define DynamicArray_hpp
 #include <iostream>
+#include <cstring>
+#include <time.h>
+
+
 using namespace std;
 
-template<class D>
+template<class T>
 class DynamicArray{
 private:
-    D* arr = nullptr;
+    T* arr = nullptr;
     int size = 0;
 public:
     //Default constructor
     DynamicArray(){
         size = 1;
-        arr = (D*) new D[1];
-        memset(arr, 0, sizeof(D) );
+        arr = (T*) new T[size];
+        memset(arr, 0, sizeof(T) );
     }
     
-    //K array's elements constructor
+    //K array elements constructor
     DynamicArray(int k){
         if (k < 0){
             throw "Array size < 0";
         }
         size = k;
-        arr = (D*) new D[k];
-        memset(arr, 0, k * sizeof(D) );
+        arr = (T*) new T[k];
+        memset( arr, 0, size * sizeof(T) );
     }
     
     //K array's elements constructor
-    DynamicArray(D* arrIn, int k){
+    DynamicArray(T* const arrIn, int k){
         if (k < 0){
             throw "Array size < 0";
         }
         size = k;
-        arr = (D*) new D[k];
+        arr = (T*) new T[k];
+        memset( arr, 0, size * sizeof(T) );
         copy(arrIn, arrIn+k, arr);
     }
     
     //Copy constructor
-    DynamicArray(DynamicArray<D> const &arrIn ){
+    DynamicArray(DynamicArray<T> const &arrIn ){
         size = arrIn.size;
-        arr = (D*) new D[arrIn.size];
-        memset( arr, 0, size * sizeof(D) );
+        arr = (T*) new T[arrIn.size];
+        memset( arr, 0, size * sizeof(T) );
         copy(arrIn.arr, arrIn.arr + min(size,arrIn.size), arr);
     }
     
     //Copy constructor by interval
-    DynamicArray(D* arrIn,int start, int end){
+    DynamicArray(T* const arrIn,int start, int end){
         start -= 1;
         size = end - start; //Set result array size
-        arr = (D*) new D[size];
+        arr = (T*) new T[size];
         copy(arrIn + start, arrIn + end, arr);//Copy array's interval in new array
     }
     
     //Copy constructor by interval
-    DynamicArray(const DynamicArray<D> &arrIn,int start, int end){
-        start -= 1;
-        if (arrIn.size < end){
-            throw "Array size < choosed interval";
-        }
-        size = end - start; //Set result array size
-        arr = (D*) new D[size];
-        copy(arrIn.arr + start, arrIn.arr + end, arr);//Copy array's interval in new array
-    }
-    //Print Array
-    void Print(){
-        if (size < 0){
-            throw "Array size < 0";
-        }
-        for (int i = 0; i < size; i++){
-            cout<<arr[i]<<'\t';
-        }
-        cout<<endl;
+    DynamicArray(DynamicArray<T> const &arrIn,int firstElement, int lastElement){
+        firstElement -= 1;
+        size = lastElement - firstElement; //Set result array size
+        arr = (T*) new T[size];
+        copy(arrIn.arr + firstElement, arrIn.arr + lastElement, arr);//Copy array's interval in new array
     }
     
     //Get array element
-    D Get(int index){
+    T Get(int index) const{
         if ( index > size ){
             throw "Index out of range";
         }
@@ -85,18 +77,17 @@ public:
     }
 
     //Set array element by index
-    void Set(D value, int index){
-        if (index < 0){
-            throw "Index < 0";
+    void Set(T value, int index){
+        if ( index < 0 || index + 1 > size ){
+            throw "Index out of range";
         }
         //Print
-        cout<<arr[index]<<endl;
+        //cout<<arr[index]<<endl;
         arr[index] = value;
-        cout<<arr[index]<<endl;
-        
+        //cout<<arr[index]<<endl;
     }
     
-    int getSize(){
+    int GetSize() const{
         return size;
     }
     
@@ -105,18 +96,112 @@ public:
         if (nSize < 0){
             throw "New size of array < 0";
         }
-        D* tmp = arr;
-        arr = (D*) new D[nSize];
-        memset(arr,0,nSize * sizeof(D) );
+        T* tmp = arr;
+        arr = (T*) new T[nSize];
+        memset(arr,0,nSize * sizeof(T) );
         copy(tmp,tmp + min(size, nSize), arr);
         size = nSize;
         delete[] tmp;
     }
+    //Print Array
+    void Print() const{
+        if (size < 0){
+            throw "Array size < 0";
+        }
+        for (int i = 0; i < size; i++){
+            cout<<arr[i]<<'\t';
+        }
+        cout<<endl;
+    }
+    
+    DynamicArray<T> operator+ (DynamicArray<T> const arrIn){
+        int ArrSize = max(size, arrIn.size);
+        T* tmpArr = new T[ArrSize];
+
+        if (size > arrIn.size){
+            copy(arr, arr + ArrSize, tmpArr);
+        }
+        else{
+            copy(arrIn.arr, arrIn.arr + ArrSize, tmpArr);
+        }
+        memset(tmpArr,0,min(size,arrIn.size) * sizeof(T));
+        for (int i = 0; i < min(size,arrIn.size); i++){
+            tmpArr[i] = arr[i] + arrIn.arr[i];
+        }
+        DynamicArray<T> tmp(tmpArr, ArrSize);
+        return tmp;
+    }
+    
+    DynamicArray<T> operator- (DynamicArray<T> const arrIn){
+        int ArrSize = max(size, arrIn.size);
+        T* tmpArr = new T[ArrSize];
+
+        if (size > arrIn.size){
+            copy(arr, arr + ArrSize, tmpArr);
+        }
+        else{
+            copy(arrIn.arr, arrIn.arr + ArrSize, tmpArr);
+        }
+        memset(tmpArr,0,ArrSize * sizeof(T));
+        for (int i = 0; i < min(size,arrIn.size); i++){
+            tmpArr[i] = arr[i] - arrIn.arr[i];
+        }
+        DynamicArray<T> tmp(tmpArr, ArrSize);
+        return tmp;
+    }
+
+    DynamicArray<T> operator* (DynamicArray<T> const arrIn){
+        int ArrSize = max(size, arrIn.size);
+        T* tmpArr = new T[ArrSize];
+
+        if (size > arrIn.size){
+            copy(arr, arr + ArrSize, tmpArr);
+        }
+        else{
+            copy(arrIn.arr, arrIn.arr + ArrSize, tmpArr);
+        }
+        memset(tmpArr,0,ArrSize * sizeof(T));
+        for (int i = 0; i < min(size,arrIn.size); i++){
+            tmpArr[i] = arr[i] * arrIn.arr[i];
+        }
+        
+        DynamicArray<T> tmp(tmpArr, ArrSize);
+        return tmp;
+    }
+    
+    DynamicArray<T> operator/ (DynamicArray<T> const arrIn){
+        int ArrSize = max(size, arrIn.size);
+        T* tmpArr = new T[ArrSize];
+        if (size > arrIn.size){
+            copy(arr, arr + ArrSize, tmpArr);
+        }
+        else{
+            copy(arrIn.arr, arrIn.arr + ArrSize, tmpArr);
+        }
+        memset(tmpArr,0,ArrSize * sizeof(T));
+        for (int i = 0; i < min(size,arrIn.size); i++){
+            try{
+                cout<<arr[i]<<' '<<arrIn.arr[i]<<endl;
+                if (arrIn.arr[i] == 0){
+                    throw "ERROR: Div by zero";
+                }
+                tmpArr[i] = arr[i] / arrIn.arr[i];
+            }
+            catch(const char* exception){
+                cout<<exception<<endl;
+            }
+        }
+        DynamicArray<T> tmp(tmpArr, ArrSize);
+        return tmp;
+    }
     
     //Distructor
     ~DynamicArray(){
-        delete[] arr;
+        if (arr){
+            delete[] arr;
+        }
     }
     
 };
+
 #endif /* DynamicArray_hpp */

@@ -7,15 +7,23 @@
 #pragma once
 #ifndef Sequence_hpp
 #define Sequence_hpp
-#include <stdio.h>
-#include "ArraySequence/ArraySequence.hpp"
-#include "ListSequence/ListSequence.hpp"
-template <class S>
+
+#include <iostream>
+using namespace std;
+
+template <class T>
 class Sequence{
 private:
-    ArraySequence<S> arrM();
-    ListSequence<S> listM();
-public:
     
+public:
+    virtual const T GetFirst() = 0;
+    virtual const T GetLast() = 0;
+    virtual const T Get(int index) = 0;
+    virtual const int GetLength() = 0;
+    virtual  void Append(T value) = 0;
+    virtual  void Prepend(T value) = 0;
+    virtual  void InsertAt(T value, int index) = 0;
+    virtual const void Print() = 0;
+
 };
 #endif /* Sequence_hpp */

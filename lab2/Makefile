@@ -1,18 +1,42 @@
+CXX = g++
+
+LL = LinkedList/LinkedList.cpp
+LLS = Sequence/LinkedListSequence/LinkedListSequence.cpp
+DA = DynamicArray/DynamicArray.cpp
+DAS = Sequence/ArraySequence/ArraySequence.cpp
+S = Sequence/Sequence.cpp
+MTRX = Matrix/matrix.cpp
+T = tests/test.cpp
+FLGS = -std=c++11 -g
+
 all: lab2
 
-list.o: LinkedList/LinkedList.cpp
-	g++ -c LinkedList/LinkedList.cpp -std=c++11 -g -o list.o
+list.o: $(LL)
+	$(CXX) -c $(LL) $(FLGS) -o list.o 
 
-DynamicArr.o: DynamicArray/DynamicArray.cpp
-	g++ -c DynamicArray/DynamicArray.cpp -std=c++11 -g -o DynamicArr.o
+DynamicArray.o: $(DA)
+	$(CXX) -c $(DA) $(FLGS) -o DynamicArray.o
 
-matrix.o: Matrix/matrix.cpp
-	g++ -c Matrix/matrix.cpp -std=c++11 -g -o matrix.o
+ArraySequence.o: $(DAS)
+	$(CXX) -c $(DAS) $(FLGS) -o ArraySequence.o
+
+LinkedListSequence.o: $(LLS)
+	$(CXX) -c $(LLS) $(FLGS) -o LinkedListSequence.o
+
+Sequence.o: $(S)
+	$(CXX) -c $(S) $(FLGS) -o Sequence.o
+
+matrix.o: $(MTRX)
+	$(CXX) -c $(MTRX) $(FLGS) -o matrix.o
+
+test.o: $(T)
+	$(CXX) -c $(T) $(FLGS) -o test.o
 
 main.o: main.cpp
-	g++ -c main.cpp -std=c++11 -g -o main.o
+	$(CXX) -c main.cpp $(FLGS) -o main.o
+	 
+lab2: list.o DynamicArray.o ArraySequence.o LinkedListSequence.o Sequence.o matrix.o test.o main.o
+	$(CXX) list.o DynamicArray.o ArraySequence.o LinkedListSequence.o Sequence.o matrix.o test.o main.o $(FLGS) -o lab2
 
-lab2: list.o DynamicArr.o matrix.o main.o
-	g++ list.o DynamicArr.o matrix.o main.o -g -o lab2
 clean:
 	    rm -f *.o
